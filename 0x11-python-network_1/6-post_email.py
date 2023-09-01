@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-"""A script that:
-- takes in a URL,
-- sends a request to the URL and displays the value
-- of the X-Request-Id variable found in the header ofthe response.
-"""
-import sys
-import urllib.request
 
-if __name__ == "__main__":
-    url = sys.argv[1]
+"""Takes in a URL and email, sends a POST request to the passed URL
+with the email as a parameter, and finally
+displays the body of the response."""
 
-    request = urllib.request.Request(url)
-    with urllib.request.urlopen(request) as response:
-        print(dict(response.headers).get("X-Request-Id"))
+import requests
+from sys import argv
+
+if __name__ == '__main__':
+    url = argv[1]
+    mail_ar = argv[2]
+    values = {'email': mail_ar}
+    r = requests.post(url, data=values)
+    print(r.text)
